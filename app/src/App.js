@@ -1,21 +1,30 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { connect } from 'react-redux'
+import {}
 
-class App extends Component {
+class App extends React.Component {
   render() {
+    const store = this.props.store
+    const num = store.getState()
+    const addNUM = this.props.addNUM
+    const removeNUM = this.props.removeNUM
+    const addAsyncNUM = this.props.addAsyncNUM
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+    <div>
+      <div>现有数字{num}</div>
+      <button onClick={() => store.dispatch(addNUM())}>+1</button>
+      <button onClick={() => store.dispatch(removeNUM())}>-1</button>
+      <button onClick={() => store.dispatch(addAsyncNUM())}>2秒后+1</button>
+    </div>)
   }
 }
 
-export default App;
+const mapStatetoProps(state){
+  return {num:state}
+}
+
+const actionCreate
+
+App = connect()(App)
+
+export default App
