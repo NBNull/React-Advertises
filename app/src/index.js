@@ -8,6 +8,7 @@ import Login from './container/login/login'
 import Register from './container/register/register'
 import reducers from './reducer'
 import config from './config';
+import AuthRoute from './component/authroute/authroute'
 import './static/icon/iconfont.css'
 import './static/css/index.css'
 
@@ -16,10 +17,16 @@ const store = createStore(reducers, compose(
   window.devToolsExtension? window.devToolsExtension():f=>f
 ))
 
+function Host() {
+  return <h2></h2>;
+}
+
 ReactDom.render(
   (<Provider store={store}>
     <BrowserRouter>
      <div>
+      <AuthRoute/>
+      <Route path='/host' component={Host}></Route>
       <Route path='/login' component={Login}></Route>
       <Route path='/register' component={Register}></Route>
      </div>
