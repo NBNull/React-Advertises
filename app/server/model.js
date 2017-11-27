@@ -22,7 +22,6 @@ const models = {
     'money':{'type':String}
   },
   chat:{
-
   }
 }
 
