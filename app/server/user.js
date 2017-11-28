@@ -40,15 +40,16 @@ Router.post('/register', function(req, res) {
     if (doc) {
       return res.json({code: 1, msg: '用户名存在'})
     }
-    User.create({
-      user,
-      pwd: md5Pwd(pwd),
-      type
-    }, function(e, d) {
+
+    const userModel = new User({user, pwd: md5Pwd(pwd), type})
+
+    userModel.save(function(e, d) {
       if (e) {
         return res.json({code: 1, msg: 'Express服务器出错'})
       }
-      return res.json({code: 0})
+      const {user,type,_id} =d
+      res.cookie('userid',_id)
+      return res.json({code: 0, data: {user}})
     })
   })
 })

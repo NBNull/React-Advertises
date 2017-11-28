@@ -65,6 +65,10 @@ function errorMsg(msg) {
   return {msg, type: ERROR_MSG}
 }
 
+export function loadData(userinfo) {
+  return {type:LOAD_DATA,payload:userinfo}
+}
+
 export function userinfo() {
   return dispatch => {
     //获取用户信息

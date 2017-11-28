@@ -5,6 +5,10 @@ import {loadData} from '../../redux/user.redux'
 import {connect} from 'react-redux'
 
 @withRouter
+@connect(
+  null,
+  {loadData}
+)
 class AuthRoute extends React.Component {
   componentDidMount() {
     const pulicList = ['/login', '/register'];
@@ -18,8 +22,8 @@ class AuthRoute extends React.Component {
         if (res.data.code == 0) {
           // TODO
           // 有登录信息
-        } else {
           this.props.loadData(res.data.data)
+        } else {
           this.props.history.push('/login')
         }
         console.log(res.data)
