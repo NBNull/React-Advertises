@@ -4,6 +4,7 @@ import {createStore,applyMiddleware,compose} from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
+import BossInfo from './container/bossinfo/bossinfo'
 import Login from './container/login/login'
 import Register from './container/register/register'
 import reducers from './reducer'
@@ -17,16 +18,13 @@ const store = createStore(reducers, compose(
   window.devToolsExtension? window.devToolsExtension():f=>f
 ))
 
-function Host() {
-  return <h2></h2>;
-}
 
 ReactDom.render(
   (<Provider store={store}>
     <BrowserRouter>
      <div>
       <AuthRoute/>
-      <Route path='/host' component={Host}></Route>
+      <Route path='/bossinfo' component={BossInfo}></Route>
       <Route path='/login' component={Login}></Route>
       <Route path='/register' component={Register}></Route>
      </div>

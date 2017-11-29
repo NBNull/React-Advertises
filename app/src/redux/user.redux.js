@@ -73,8 +73,8 @@ export function userinfo() {
   return dispatch => {
     //获取用户信息
     axios.get('/user/info').then(res => {
-      if (res.status == 200) {
-        if (res.data.code == 0) {
+      if (res.status === 200) {
+        if (res.data.code === 0) {
           // TODO
           // 有登录信息
         } else {
@@ -98,7 +98,7 @@ export function login({user, pwd}) {
   }
   return dispatch => {
     axios.post('/user/login', {user, pwd}).then(res => {
-      if (res.status == 200 && res.data.code === 0) {
+      if (res.status === 200 && res.data.code === 0) {
         dispatch(loginSuccess(res.data.data))
       } else {
         dispatch(errorMsg(res.data.msg))
