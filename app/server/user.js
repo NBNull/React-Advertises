@@ -8,10 +8,27 @@ const _filter = {
   '__v': 0
 }
 
+//得到用户信息
 Router.get('/list', function(req, res) {
   // User.remove({}, function(e,d) {})
   User.find({}, function(err, doc) {
     return res.json(doc)
+  })
+})
+
+//信息更改
+Router.post('/update',function(req,res) {
+  const userid = req.cookies.userid
+  if (!userid) {
+    return json.dumps({code:1});
+  }
+  const body = req.body
+  User.findByIdAndUpdate(userid,body,function (err,doc){
+    const data = Object.assign({},{
+      user:doc.user,
+      type:doc.type
+    },body)
+    return res.json({code:0,data});
   })
 })
 
@@ -40,7 +57,7 @@ Router.post('/register', function(req, res) {
     if (doc) {
       return res.json({code: 1, msg: '用户名存在'})
     }
-
+    //加密
     const userModel = new User({user, pwd: md5Pwd(pwd), type})
 
     userModel.save(function(e, d) {
@@ -54,6 +71,7 @@ Router.post('/register', function(req, res) {
   })
 })
 
+//验证用户信息
 Router.get('/info', function(req, res) {
   const {userid} = req.cookies
   if (!userid) {

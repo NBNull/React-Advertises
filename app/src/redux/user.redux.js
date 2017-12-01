@@ -1,14 +1,12 @@
 import axios from 'axios'
 import {getRedirectPath} from '../util'
 
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+const AUTH_SUCCESS = 'AUTH_SUCCESS';//登录注册统一成一个返回方式
 const ERROR_MSG = 'ERROR_MSG';
 const LOAD_DATA = 'LOAD_DATA'
 //用户初始状态
 const initState = {
   redirectTo: '',
-  isAuth: false,
   msg: '',
   user: '',
   pwd: '',
@@ -18,20 +16,11 @@ const initState = {
 //reducer
 export function user(state = initState, action) {
   switch (action.type) {
-    case REGISTER_SUCCESS:
+    case AUTH_SUCCESS:
       return {
         ...state,
-        msg: '',
+        msg:'',
         redirectTo: getRedirectPath(action.payload),
-        isAuth: true,
-        ...action.payload
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        msg: '',
-        redirectTo: getRedirectPath(action.payload),
-        isAuth: true,
         ...action.payload
       };
     case LOAD_DATA:
@@ -42,7 +31,6 @@ export function user(state = initState, action) {
     case ERROR_MSG:
       return {
         ...state,
-        isAuth: false,
         msg: action.msg
       };
     default:
@@ -51,24 +39,35 @@ export function user(state = initState, action) {
 
 }
 
-//登录成功
-function loginSuccess(data) {
-  return {type: LOGIN_SUCCESS, payload: data}
+function authSucess(data) {
+  return {type: AUTH_SUCCESS, payload: data}
 }
 
-//注册成功
-function registerSuccess(data) {
-  return {type: REGISTER_SUCCESS, payload: data}
-}
-
+//错误信息
 function errorMsg(msg) {
   return {msg, type: ERROR_MSG}
 }
 
+//用户信息更新
+export function update(data) {
+  return dispatch=>{
+    axios.post('/user/update',data)
+    .then(res=>{
+      if (res.status === 200 && res.data.code === 0) {
+        dispatch(authSucess(res.data.data))
+      } else {
+        dispatch(errorMsg(res.data.msg))
+      }
+    })
+  }
+}
+
+//信息载入
 export function loadData(userinfo) {
   return {type:LOAD_DATA,payload:userinfo}
 }
 
+//用户信息获取
 export function userinfo() {
   return dispatch => {
     //获取用户信息
@@ -90,6 +89,7 @@ export function userinfo() {
   };
 }
 
+//用户登录
 export function login({user, pwd}) {
   if (!user) {
     return errorMsg('请输入账号')
@@ -99,7 +99,7 @@ export function login({user, pwd}) {
   return dispatch => {
     axios.post('/user/login', {user, pwd}).then(res => {
       if (res.status === 200 && res.data.code === 0) {
-        dispatch(loginSuccess(res.data.data))
+        dispatch(authSucess(res.data.data))
       } else {
         dispatch(errorMsg(res.data.msg))
       }
@@ -107,6 +107,7 @@ export function login({user, pwd}) {
   };
 }
 
+//用户注册
 export function register({user, type, pwd, repeatpwd}) {
   if (!user) {
     return errorMsg('请输入账号')
@@ -123,7 +124,7 @@ export function register({user, type, pwd, repeatpwd}) {
   return dispatch => {
     axios.post('/user/register', {user, pwd, type}).then(res => {
       if (res.status == 200 && res.data.code === 0) {
-        dispatch(registerSuccess({user, pwd, type}));
+        dispatch(authSucess({user, pwd, type}));
       } else {
         dispatch(errorMsg(res.data.msg))
       }
