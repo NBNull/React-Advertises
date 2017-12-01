@@ -9,14 +9,12 @@ import {update} from '../../redux/user.redux'
   state=>state.user,
   {update}
 )
-class BossInfo extends React.Component{
+class GeniusInfo extends React.Component{
   constructor(props) {
     super(props)
     this.state = {
       title:'',
-      desc:'',
-      company:'',
-      money:'',
+      desc:''
     }
   }
   onChange(key,val){
@@ -32,7 +30,7 @@ class BossInfo extends React.Component{
         {redirect&&redirect!==path ? <Redirect to={this.props.redirectTo}/> : null}
         <NavBar mode="dark">
            <div className='anticon icon-contacts'
-           style={{color:'#ffffff',fontSize:'20px'}}> BOSS完善信息页
+           style={{color:'#ffffff',fontSize:'20px'}}> Genius完善信息页
            </div>
         </NavBar>
         <AvatarSelector
@@ -43,10 +41,8 @@ class BossInfo extends React.Component{
            }}
         ></AvatarSelector>
         <List>
-        <InputItem onChange={(v)=>this.onChange('title',v)}>招聘职位</InputItem>
-        <InputItem onChange={(v)=>this.onChange('company',v)}>公司名称</InputItem>
-        <InputItem onChange={(v)=>this.onChange('money',v)}>职位薪资</InputItem>
-        <TextareaItem title="职位简介" rows={3} autoHeight
+        <InputItem onChange={(v)=>this.onChange('title',v)}>求职岗位</InputItem>
+        <TextareaItem title="个人简介" rows={3} autoHeight
         placeholder="输入你的职位描述"
         onChange={(v)=>this.onChange('desc',v)}></TextareaItem>
         </List>
@@ -61,4 +57,4 @@ class BossInfo extends React.Component{
   }
 }
 
-export default BossInfo
+export default GeniusInfo

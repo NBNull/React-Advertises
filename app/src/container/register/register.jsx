@@ -56,10 +56,10 @@ class Register extends React.Component{
       <WhiteSpace/>
       <List>
           <RadioItem checked={this.state.type=='genius'} onChange={()=>this.handleChange('type','genius')} >
-              <div className='anticon icon-codesquareo' style={{color:'#108ee9',fontSize:'16px'}}> 牛人</div>
+              <div className='anticon icon-bulb' style={{color:'#108ee9',fontSize:'16px'}}> 牛人</div>
           </RadioItem>
           <RadioItem checked={this.state.type=='boss'} onChange={()=>this.handleChange('type','boss')} >
-              <div className='anticon icon-dingding' style={{color:'#108ee9',fontSize:'16px'}}> 老板</div>
+              <div className='anticon icon-aliwangwang-o1' style={{color:'#108ee9',fontSize:'16px'}}> 老板</div>
           </RadioItem>
       </List>
       <WingBlank>

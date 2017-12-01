@@ -39,8 +39,9 @@ export function user(state = initState, action) {
 
 }
 
-function authSucess(data) {
-  return {type: AUTH_SUCCESS, payload: data}
+function authSucess(obj) {
+  const {pwd,...data} = obj
+  return {type: AUTH_SUCCESS, payload:data}
 }
 
 //错误信息

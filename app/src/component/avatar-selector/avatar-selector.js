@@ -1,18 +1,16 @@
 import React from 'react'
 import {Grid, List} from 'antd-mobile'
+import PropTypes from 'prop-types'
 
 class AvatarSelector extends React.Component {
+  static propType = {
+    selectAvatar: PropTypes.func.isRequired
+  }
   constructor(props) {
     super(props)
     this.state = {
       elem: ''
     }
-  }
-  componentWillMount(){
-    console.log("渲染开始");
-  }
-  componentDidMount(){
-    console.log("渲染完毕");
   }
   render() {
     setTimeout(function(){
@@ -22,7 +20,6 @@ class AvatarSelector extends React.Component {
       icon: require(`../img/${val}.png`),
       text: val
     }))
-    console.log(avatorList);
     const gridHeader = this.state.text
       ? (<div>
         <span style={{fontSize:18}}>已选择头像: </span>
