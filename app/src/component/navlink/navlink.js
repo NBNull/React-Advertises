@@ -9,14 +9,14 @@ class NavLinkBar extends React.Component {
     data: PropTypes.array.isRequired
   }
   render(){
-    console.log(this.props.data);
     const navList = this.props.data.filter(v=>!v.hide)
-    console.log(navList);
     const {pathname} = this.props.location
     return(
       <TabBar>
         {navList.map(v=>(
-          <TabBar.Item key={v.path} title={v.text}
+          <TabBar.Item
+          key={v.path}
+          title={v.text}
           icon={
             <div
             className={`anticon icon-${v.icon}`}

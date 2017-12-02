@@ -4,7 +4,6 @@ import {List, InputItem, WhiteSpace, WingBlank, Button, Radio} from 'antd-mobile
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {register} from '../../redux/user.redux'
-import {redirectTo} from '../../util'
 
 @connect(
   state=>state.user,
@@ -55,10 +54,10 @@ class Register extends React.Component{
       </List>
       <WhiteSpace/>
       <List>
-          <RadioItem checked={this.state.type=='genius'} onChange={()=>this.handleChange('type','genius')} >
-              <div className='anticon icon-bulb' style={{color:'#108ee9',fontSize:'16px'}}> 牛人</div>
+          <RadioItem checked={this.state.type==='genius'} onChange={()=>this.handleChange('type','genius')} >
+              <div className='anticon icon-bulb1' style={{color:'#108ee9',fontSize:'16px'}}> 牛人</div>
           </RadioItem>
-          <RadioItem checked={this.state.type=='boss'} onChange={()=>this.handleChange('type','boss')} >
+          <RadioItem checked={this.state.type==='boss'} onChange={()=>this.handleChange('type','boss')} >
               <div className='anticon icon-aliwangwang-o1' style={{color:'#108ee9',fontSize:'16px'}}> 老板</div>
           </RadioItem>
       </List>

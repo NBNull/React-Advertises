@@ -10,9 +10,10 @@ const _filter = {
 
 //得到用户信息
 Router.get('/list', function(req, res) {
-  // User.remove({}, function(e,d) {})
-  User.find({}, function(err, doc) {
-    return res.json(doc)
+  const {type} = req.query
+  //User.remove({}, function(e,d) {})
+  User.find({type}, function(err, doc) {
+    return res.json({code:0,data:doc})
   })
 })
 
