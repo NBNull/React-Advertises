@@ -1,15 +1,15 @@
 import axios from 'axios'
 import {getRedirectPath} from '../util'
 
-const AUTH_SUCCESS = 'AUTH_SUCCESS';//登录注册统一成一个返回方式
+const AUTH_SUCCESS = 'AUTH_SUCCESS'; //登录注册统一成一个返回方式
+const LOG_OUT = 'LOG_OUT';
 const ERROR_MSG = 'ERROR_MSG';
-const LOAD_DATA = 'LOAD_DATA'
+const LOAD_DATA = 'LOAD_DATA';
 //用户初始状态
 const initState = {
   redirectTo: '',
   msg: '',
   user: '',
-  pwd: '',
   type: ''
 };
 
@@ -19,7 +19,7 @@ export function user(state = initState, action) {
     case AUTH_SUCCESS:
       return {
         ...state,
-        msg:'',
+        msg: '',
         redirectTo: getRedirectPath(action.payload),
         ...action.payload
       };
@@ -33,15 +33,20 @@ export function user(state = initState, action) {
         ...state,
         msg: action.msg
       };
+    case LOG_OUT:
+      return {
+        ...initState,redirectTo:'/login'
+      }
     default:
       return state
   }
 
 }
 
+//成功
 function authSucess(obj) {
   const {pwd,...data} = obj
-  return {type: AUTH_SUCCESS, payload:data}
+  return {type: AUTH_SUCCESS, payload: data}
 }
 
 //错误信息
@@ -49,11 +54,15 @@ function errorMsg(msg) {
   return {msg, type: ERROR_MSG}
 }
 
+//登出
+export function logoutSubmit() {
+  return {type:LOG_OUT}
+}
+
 //用户信息更新
 export function update(data) {
-  return dispatch=>{
-    axios.post('/user/update',data)
-    .then(res=>{
+  return dispatch => {
+    axios.post('/user/update', data).then(res => {
       if (res.status === 200 && res.data.code === 0) {
         dispatch(authSucess(res.data.data))
       } else {
@@ -65,7 +74,7 @@ export function update(data) {
 
 //信息载入
 export function loadData(userinfo) {
-  return {type:LOAD_DATA,payload:userinfo}
+  return {type: LOAD_DATA, payload: userinfo}
 }
 
 //用户信息获取
