@@ -4,6 +4,7 @@ import {List, InputItem, WhiteSpace, WingBlank, Button} from 'antd-mobile';
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {login} from '../../redux/user.redux'
+import HOC_Form from '../../component/HOC-Form/HOC-Form'
 
 
 @connect(
@@ -11,13 +12,11 @@ import {login} from '../../redux/user.redux'
   {login}
 )
 
+@HOC_Form
+
 class Login extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      user:'',
-      pwd:''
-    }
     this.toRegister = this.toRegister.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
   }
@@ -25,13 +24,8 @@ class Login extends React.Component {
     console.log(this.props)
     this.props.history.push('/register')
   }
-  handleChange(key,val){
-    this.setState({
-      [key]:val
-    })
-  }
   handleLogin(){
-    this.props.login(this.state)
+    this.props.login(this.props.state)
   }
   render() {
     return (<div>
@@ -40,12 +34,12 @@ class Login extends React.Component {
         <Logo/>
       </WingBlank>
       <List>
-        <InputItem onChange={v=>this.handleChange('user',v)}>
+        <InputItem onChange={v=>this.props.handleChange('user',v)}>
           <div className='anticon icon-user' style={{color: '#108ee9',fontSize: '16px'}}>
             账号
           </div>
         </InputItem>
-        <InputItem type="password" onChange={v=>this.handleChange('pwd',v)}>
+        <InputItem type="password" onChange={v=>this.props.handleChange('pwd',v)}>
           <div className='anticon icon-Safety' style={{color: '#108ee9',fontSize: '16px'}}>
             密码
           </div>
