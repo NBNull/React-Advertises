@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Switch,Route} from 'react-router'
+import {Route, Redirect} from 'react-router-dom'
 import {NavBar} from 'antd-mobile';
 import NavLinkBar from '../navlink/navlink'
 import Boss from '../../component/boss/boss'
@@ -46,17 +46,16 @@ class Dashboard extends React.Component {
         component: User
       }
     ]
-    return (<div>
-      <NavBar className='fixd-header' mode='dark'>{navList.find(v => v.path === pathname).title}</NavBar>
-      <div>
-         <Switch>
-            {navList.map(v=>(
-              <Route key={v.path} path={v.path} component={v.component}></Route>
-            ))}
-         </Switch>
-      </div>
-      <NavLinkBar data={navList}/>
-    </div>)
+    const page = navList.find(v => v.path === pathname)
+    return page
+      ? (<div>
+        <NavBar className='fixd-header' mode='dark'>{page.title}</NavBar>
+        <div>
+          {navList.map(v => (<Route key={v.path} path={v.path} component={v.component}></Route>))}
+        </div>
+        <NavLinkBar data={navList}/>
+      </div>)
+      : <Redirect to='/msg'></Redirect>
   }
 }
 
