@@ -8,11 +8,11 @@ mongoose.connection.on('connected',function () {
 
 const models = {
   user:{
-    'user':{type:String,require:true},
-    'pwd':{type:String,require:true},
-    'type':{type:String, require:true},
+    'user':{'type':String,'require':true},
+    'pwd':{'type':String,'require':true},
+    'type':{'type':String,'require':true},
     //头像
-    'avator':{type:String, require:true, defaultValue:'http://www.jianbihua.cc/uploads/allimg/141105/15-14110509413J44-lp.jpg'},
+    'avator':{'type':String,'require':true,'defaultValue':'http://www.jianbihua.cc/uploads/allimg/141105/15-14110509413J44-lp.jpg'},
     //简介
     'desc':{'type':String},
     //职位名
@@ -22,6 +22,12 @@ const models = {
     'money':{'type':String}
   },
   chat:{
+    'charid':{'type':String,'require':true},
+    'from':{'type':String,'require':true},
+    'to':{'type':String,'require':true},
+    'read':{'type':Boolean,'default':false},
+    'content':{'type':String,'require':true,'default':''},
+    'create_time':{'type':Date,'default':new Date().getTime()}
   }
 }
 
