@@ -20,7 +20,8 @@ Router.get('/list', function(req, res) {
 
 //获得聊天列表
 Router.get('/getmsglist',function(req,res) {
-  const user = req.cookies.user
+  const user = req.cookies.userid
+  //Chat.remove({}, function(e,d) {})
   User.find({},function(e,userdoc) {
     let users = {}
     userdoc.forEach(v=>{
