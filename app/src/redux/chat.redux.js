@@ -22,7 +22,7 @@ export function chat(state=initState,action) {
     case MSG_RECV:
       return {...state, chatmsg:[...state.chatmsg,action.payload], unread:state.unread+1}
     case MSG_READ:
-      break;
+
     default:
       return state
   }
@@ -55,11 +55,12 @@ export function sendMsg({from,to,msg}) {
 
 //得到聊天信息
 export function getMsgList() {
-  return dispatch=>{
+  return (dispatch,getState)=>{
     axios.get('/user/getmsglist')
     .then(res=>{
       if (res.status === 200 && res.data.code === 0) {
-        dispatch(msgList(res.data.msgs, res.data.users))
+        const userid = getState().user._id
+				dispatch(msgList(res.data.msgs, res.data.users))
       }
     })
   }

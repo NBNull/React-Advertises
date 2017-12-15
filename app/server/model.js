@@ -12,7 +12,7 @@ const models = {
     'pwd':{'type':String,'require':true},
     'type':{'type':String,'require':true},
     //头像
-    'avator':{'type':String,'require':true,'defaultValue':'http://www.jianbihua.cc/uploads/allimg/141105/15-14110509413J44-lp.jpg'},
+    'avator':{'type':String,'require':true},
     //简介
     'desc':{'type':String},
     //职位名
