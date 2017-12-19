@@ -83,6 +83,11 @@ class Chat extends React.Component {
         columnNum = {9}
         carouselMaxRow = {4}
         isCarousel
+        onClick = {el=>
+          this.setState({
+            text:this.state.text+el.text
+          })
+        }
         />:null}
       </div>
     </div>)

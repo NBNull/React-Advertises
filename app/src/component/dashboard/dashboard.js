@@ -1,16 +1,13 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Route, Redirect} from 'react-router-dom'
-import {NavBar} from 'antd-mobile';
+import {NavBar} from 'antd-mobile'
 import NavLinkBar from '../navlink/navlink'
 import Boss from '../../component/boss/boss'
 import Genius from '../../component/genius/genius'
+import Msg from '../../component/msg/msg'
 import User from '../user/user'
 import {getMsgList,recvMsg} from '../../redux/chat.redux'
-
-function Msg() {
-  return (<h2>MSG</h2>)
-}
 
 @connect(
   state => state,
