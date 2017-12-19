@@ -33,8 +33,8 @@ function msgList(msgs, users, userid) {
   return {type:MSG_LIST,payload:{msgs,users,userid}}
 }
 
-function msgRecv(msgs, userid) {
-  return {type:MSG_RECV,payload:{msgs,userid}}
+function msgRecv(msg, userid) {
+  return {userid,type:MSG_RECV,payload:msg}
 }
 
 //接收消息
