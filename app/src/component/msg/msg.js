@@ -41,8 +41,8 @@ class Msg extends React.Component {
               key = {lastItem._id}
               extra = {<Badge text={unreadNum}/>}
               thumb = {require(`../img/${avator}.png`)}
-            >{lastItem.content}
-              <Brief>{name}</Brief>
+            >{name}
+              <Brief>{lastItem.content}</Brief>
             </Item>
           )
         })}
